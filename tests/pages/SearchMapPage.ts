@@ -37,12 +37,12 @@ export class SearchMapPage {
     const dropdown = this.getDropdownByLabel(labelName);
 
     await dropdown.click();
+    await this.page.waitForLoadState("networkidle");
 
     await this.dropdownOptions.first().waitFor({ state: "visible" });
 
     const count = await this.dropdownOptions.count();
 
-    // Logic: Skip index 0 (Alle) if there are multiple options
     const randomIndex =
       count > 1 ? Math.floor(Math.random() * (count - 1)) + 1 : 0;
 
